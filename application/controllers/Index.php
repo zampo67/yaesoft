@@ -7,11 +7,13 @@
  */
 
 use Yaf\Controller_Abstract;
+use yae\base\Object;
 
 class IndexController extends  Controller_Abstract
 {
     public function indexAction()
     {
-        echo '111111';
+        echo Object::className();
+        exit;
     }
 }

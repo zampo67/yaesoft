@@ -14,6 +14,9 @@
 use Yaf\Application;
 use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
+use Yaf\Loader;
+use yae\Yae;
+use yae\web\Application as YaeApp;
 
 /**
  * Class Bootstrap
@@ -24,6 +27,9 @@ final class  Bootstrap extends Bootstrap_Abstract
 {
     public function _init(Dispatcher $dispatcher)
     {
+        Loader::import(ROOT_PATH . '/application/functions.php');
+        // 初始化应用配置信息
+        Yae::$app = new YaeApp();
         //echo Application::app()->getConfig()->application->database->driver;
     }
 }

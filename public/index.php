@@ -14,6 +14,9 @@ define('ROOT_PATH',      realpath(dirname(dirname(__FILE__))));
 define('INI_PATH',       ROOT_PATH.DIRECTORY_SEPARATOR.'conf'.DIRECTORY_SEPARATOR.'application.ini');
 
 use Yaf\Application;
-
-$app = new Application(INI_PATH);
-//$app->bootstrap()->run();
+try {
+    $app = new Application(INI_PATH);
+    $app->bootstrap()->run();
+}catch (Exception $e){
+    echo $e->getMessage();
+}
