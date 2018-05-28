@@ -6,14 +6,13 @@
  * Time: 10:57
  */
 
-use Yaf\Controller_Abstract;
-use yae\base\Object;
 
-class IndexController extends  Controller_Abstract
+class IndexController extends  \our\Controller_AbstractIndex
 {
     public function indexAction()
     {
-        echo Object::className();
+        echo 111;
+
         exit;
     }
 }

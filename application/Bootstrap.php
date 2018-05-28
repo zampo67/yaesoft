@@ -14,9 +14,7 @@
 use Yaf\Application;
 use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
-use Yaf\Loader;
-use yae\Yae;
-use yae\web\Application as YaeApp;
+use Yaf\Registry;
 
 /**
  * Class Bootstrap
@@ -25,11 +23,21 @@ use yae\web\Application as YaeApp;
  */
 final class  Bootstrap extends Bootstrap_Abstract
 {
-    public function _init(Dispatcher $dispatcher)
+    public function _init()
     {
-        Loader::import(ROOT_PATH . '/application/functions.php');
-        // 初始化应用配置信息
-        Yae::$app = new YaeApp();
-        //echo Application::app()->getConfig()->application->database->driver;
+        Yaf\Loader::import(APPLICATION_PATH . '/functions.php');
+    }
+
+    public function _initConfig(Dispatcher $dispatcher)
+    {
+        $config = Application::app()->getConfig()->toArray();
+        Registry::set('app_config',$config);
+        $dispatcher->returnResponse(true); // 开启后，不自动加载视图
+
+    }
+
+    public function _initPlugin(Dispatcher $dispatcher)
+    {
+
     }
 }

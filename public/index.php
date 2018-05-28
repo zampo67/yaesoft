@@ -8,14 +8,12 @@
  * Date: 2018/5/25
  * Time: 9:21
  */
+define ("APPLICATION_PATH", __DIR__ . "/../application");
 
-define('APP_NAME',      'application');
-define('ROOT_PATH',      realpath(dirname(dirname(__FILE__))));
-define('INI_PATH',       ROOT_PATH.DIRECTORY_SEPARATOR.'conf'.DIRECTORY_SEPARATOR.'application.ini');
 
 use Yaf\Application;
 try {
-    $app = new Application(INI_PATH);
+    $app = new Application(__DIR__."/../conf/application.ini");
     $app->bootstrap()->run();
 }catch (Exception $e){
     echo $e->getMessage();
