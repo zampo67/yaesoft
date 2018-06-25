@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: renbo
- * Date: 2018/5/28
- * Time: 15:40
+ * Date: 2018/6/25
+ * Time: 13:54
  */
 
 namespace our\base;
 
 
-class Object
+class Component extends BaseObject
 {
 
 }

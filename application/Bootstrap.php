@@ -28,12 +28,24 @@ final class  Bootstrap extends Bootstrap_Abstract
         Yaf\Loader::import(APPLICATION_PATH . '/functions.php');
     }
 
+    /**
+     * 系统全局配置项
+     * @param Dispatcher $dispatcher
+     */
     public function _initConfig(Dispatcher $dispatcher)
     {
         $config = Application::app()->getConfig()->toArray();
         Registry::set('app_config',$config);
         $dispatcher->disableView(); // 开启后，不自动加载视图
 
+    }
+
+    /**
+     * 系统全局app,负责系统基础类的调度
+     */
+    public function _initComponents()
+    {
+        new our\web\Application(['id'=>'test']);
     }
 
     public function _initPlugin(Dispatcher $dispatcher)
