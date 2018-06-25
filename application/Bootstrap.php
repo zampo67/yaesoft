@@ -32,7 +32,7 @@ final class  Bootstrap extends Bootstrap_Abstract
     {
         $config = Application::app()->getConfig()->toArray();
         Registry::set('app_config',$config);
-        $dispatcher->returnResponse(true); // 开启后，不自动加载视图
+        $dispatcher->disableView(); // 开启后，不自动加载视图
 
     }
 

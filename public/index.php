@@ -10,7 +10,6 @@
  */
 define ("APPLICATION_PATH", __DIR__ . "/../application");
 
-
 use Yaf\Application;
 try {
     $app = new Application(__DIR__."/../conf/application.ini");
