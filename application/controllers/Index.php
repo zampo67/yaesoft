@@ -11,6 +11,6 @@ class IndexController extends  \our\Controller_AbstractIndex
 {
     public function indexAction()
     {
-        echo Yae::$app->id;
+        Yae::$app->db->look();
     }
 }

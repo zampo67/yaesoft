@@ -58,6 +58,7 @@ class BaseObject
      *
      * @param $name
      * @param $value
+     * @return mixed the property value
      * @throws UnknownPropertyException if the property is not defined
      * @throws InvalidCallException if the property is read-only
      * @see __get()
@@ -66,10 +67,11 @@ class BaseObject
     {
         $setter = 'set' . $name;
         if (method_exists($this, $setter)) {
-            $this->$setter($value);
+            return $this->$setter($value);
         }elseif(method_exists($this, 'get' . $name)){
             throw new InvalidCallException('Setting read-only property: ' . get_class($this) . '::' . $name);
         }
+
         throw new UnknownPropertyException('Setting unknown property: ' . get_class($this) . '::' . $name);
     }
 }

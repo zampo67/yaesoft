@@ -45,7 +45,11 @@ final class  Bootstrap extends Bootstrap_Abstract
      */
     public function _initComponents()
     {
-        new our\web\Application(['id'=>'test']);
+        new our\web\Application(['Components'=>[
+            'db' => [
+                'class' => 'our\db\Test',
+            ]
+        ]]);
     }
 
     public function _initPlugin(Dispatcher $dispatcher)

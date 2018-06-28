@@ -10,12 +10,26 @@ namespace our\base;
 
 use Yae;
 
-class Application extends Component
+/**
+ * Class Application
+ * @package our\base
+ *
+ * @property \our\db\Test $db
+ */
+class Application extends ServiceLocator
 {
     public function __construct($config=[])
     {
         Yae::$app = $this;
 
         Component::__construct($config);
+    }
+
+    /**
+     * @throws InvalidConfigException
+     */
+    public function getDb()
+    {
+        return $this->get('db');
     }
 }

@@ -23,4 +23,9 @@ class BaseYae
 
         return $object;
     }
+
+    public static function createObject($definition)
+    {
+        return new $definition['class'];
+    }
 }
