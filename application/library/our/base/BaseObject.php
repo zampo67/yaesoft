@@ -31,4 +31,45 @@ class BaseObject
     public function init()
     {
     }
+
+    /**
+     * 获取成员变量
+     *
+     * @param $name
+     * @return mixed
+     * @throws UnknownPropertyException if the property is not defined
+     * @throws InvalidCallException if the property is write-only
+     * @see __set()
+     */
+    public function __get($name)
+    {
+        $getter = 'get' . $name;
+        if (method_exists($this, $getter)) {
+            return $this->$getter();
+        } elseif (method_exists($this, 'set' . $name)) {
+            throw new InvalidCallException('Getting write-only property: ' . get_class($this) . '::' . $name);
+        }
+
+        throw new UnknownPropertyException('Getting unknown property: ' . get_class($this) . '::' . $name);
+    }
+
+    /**
+     * 设置成员变量
+     *
+     * @param $name
+     * @param $value
+     * @throws UnknownPropertyException if the property is not defined
+     * @throws InvalidCallException if the property is read-only
+     * @see __get()
+     */
+    public function __set($name, $value)
+    {
+        $setter = 'set' . $name;
+        if (method_exists($this, $setter)) {
+            $this->$setter($value);
+        }elseif(method_exists($this, 'get' . $name)){
+            throw new InvalidCallException('Setting read-only property: ' . get_class($this) . '::' . $name);
+        }
+        throw new UnknownPropertyException('Setting unknown property: ' . get_class($this) . '::' . $name);
+    }
 }
