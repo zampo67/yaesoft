@@ -9,3 +9,5 @@ class Yae extends \our\base\BaseYae
 {
 
 }
+
+Yae::$container = new our\di\Container();

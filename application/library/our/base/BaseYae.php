@@ -8,9 +8,11 @@
 
 namespace our\base;
 
-
 class BaseYae
 {
+    /**
+     * @var \our\web\Application the application instance
+     */
     public static $app;
 
     public static $container;
@@ -24,8 +26,26 @@ class BaseYae
         return $object;
     }
 
-    public static function createObject($definition)
+    /**
+     * @param $type
+     * @param array $params
+     * @return mixed
+     * @throws InvalidConfigException
+     */
+    public static function createObject($type, array $params = [])
     {
-        return new $definition['class'];
+        if (is_string($type)) {
+            return static::$container->get($type, $params);
+        } elseif (is_array($type) && isset($type['class'])) {
+            $class = $type['class'];
+            unset($type['class']);
+            return static::$container->get($class, $params, $type);
+        } elseif (is_callable($type, true)) {
+            return static::$container->invoke($type, $params);
+        } elseif (is_array($type)) {
+            throw new InvalidConfigException('Object configuration must be an array containing a "class" element.');
+        }
+
+        throw new InvalidConfigException('Unsupported configuration type: ' . gettype($type));
     }
 }

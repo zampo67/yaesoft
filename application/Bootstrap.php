@@ -48,6 +48,7 @@ final class  Bootstrap extends Bootstrap_Abstract
         new our\web\Application(['Components'=>[
             'db' => [
                 'class' => 'our\db\Test',
+                'test' => 'this is test'
             ]
         ]]);
     }

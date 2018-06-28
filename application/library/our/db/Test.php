@@ -11,6 +11,7 @@ namespace our\db;
 
 class Test
 {
+    public $test;
     public function look()
     {
         echo '你是我的眼';
